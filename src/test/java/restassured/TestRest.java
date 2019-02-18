@@ -1,5 +1,6 @@
 package restassured;
 
+import config.RestConfig;
 import cucumber.api.java.en.Given;
 import entity.User;
 import io.restassured.RestAssured;
@@ -11,7 +12,6 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.EnumSet;
 import java.util.List;
 import java.util.stream.IntStream;
 
@@ -19,12 +19,15 @@ public class TestRest {
 
     private RequestSpecification httpRequest;
     private User user;
+    private RestConfig config;
 
-    @Given("Config URL: '(.*)'")
-    public void setupUrl(String url) {
-        // Specify the base URL to RESTful service
-        RestAssured.baseURI = url;
-    }
+
+
+//    @Given("Config URL: '(.*)'")
+//    public void setupUrl(String url) {
+//        // Specify the base URL to RESTful service
+//        RestAssured.baseURI = url;
+//    }
 
     @Given("Set request specification to given")
     public void setRequestSpecificationToGiven() {
@@ -39,15 +42,22 @@ public class TestRest {
      */
     @Given("Get a single user: '(.*)'")
     public User getOneUser(String requestParameters) {
-        Response response = httpRequest.accept(ContentType.JSON).request(Method.GET,requestParameters);
+        Response response = httpRequest.accept(ContentType.JSON).request(requestParameters);
         return null;
     }
 
     // RAW TEST will be re-factored
-    @Given("Testing GET, parameters: '(.*)'")
-    public void testingGet(String getParameters) {
+    @Given("Testing GET, url: '(.*)' parameters: '(.*)'")
+    public void testingGet(String url, String getParameters) {
+
+     //   RestAssured.baseURI = url;
+//        config.configRestApiEndpoint(getParameters,"json","GET");
+
         // Make a request, set content type, set the method: GET/POST/DELETE/PUT ect., give the url parameter
-        Response response = httpRequest.accept(ContentType.JSON).request(Method.GET, getParameters);
+       // Response response = httpRequest.accept(ContentType.JSON).request(Method.GET, getParameters);
+
+      //  httpRequest = config.configRestApiEndpoint(url,"json","GET");
+        Response response = httpRequest.request(getParameters);
         // Save the response(JSON) in a string
         String responseBody = response.getBody().asString();
         // Create a JSON object from the response
@@ -64,7 +74,12 @@ public class TestRest {
                         ,jsonArray.getJSONObject(i).getString("last_name")
                         ,jsonArray.getJSONObject(i).getString("avatar"))));
         System.out.println(users);
+    }
 
+    @Given("Test Rest")
+    public void testRest() {
+        httpRequest.accept(ContentType.JSON);
+        httpRequest.request(Method.GET);
 
     }
 }
