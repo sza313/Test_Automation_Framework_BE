@@ -82,4 +82,31 @@ public class TestRest {
         httpRequest.request(Method.GET);
 
     }
+
+    //    @Given("Init request with content type: '(.*)'")
+//    public void initRequest(String contentType) {
+//        requestSpecification = new RequestSpecBuilder()
+//                .setContentType(getContentType(contentType))
+//                .setAccept(getContentType(contentType)).build();
+//    }
+
+    private ContentType getContentType(String contentType) {
+        ContentType content = ContentType.JSON;
+        for (ContentType c : ContentType.values()) {
+            if (c.matches("(.*)" + contentType + "(.*)")) {
+                content = c;
+            }
+        }
+        return content;
+    }
+
+    private Method getMethod(String requestMethod) {
+        Method method = Method.GET;
+        for (Method m : Method.values()) {
+            if (m.toString().equalsIgnoreCase(requestMethod)) {
+                method = m;
+            }
+        }
+        return method;
+    }
 }
