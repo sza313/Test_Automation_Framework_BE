@@ -1,7 +1,7 @@
 Feature: Testing API GET
 
   @Sample
-  Scenario: Sample API scenario
+  Scenario: Testing the API GET endpoints
     Given Config URL: 'https://reqres.in'
     Given Test a single user by first name: Janet and last name: Weaver with request: '/api/users/2'
     Given Test a single resource by name: fuchsia rose with request: '/api/unknown/2'
