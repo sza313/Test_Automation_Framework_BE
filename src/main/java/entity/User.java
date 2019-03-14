@@ -1,14 +1,20 @@
 package entity;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
 @Data
-@AllArgsConstructor
 public class User {
 
-    private int id;
-    private String firstName;
+    @JsonProperty("last_name")
     private String lastName;
+
+    private int id;
+
     private String avatar;
+
+    @JsonProperty("first_name")
+    private String firstName;
+
 }

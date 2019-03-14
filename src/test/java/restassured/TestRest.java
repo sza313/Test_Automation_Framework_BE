@@ -1,5 +1,7 @@
 package restassured;
 
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import config.RestConfig;
 import cucumber.api.java.en.Given;
 import entity.User;
@@ -11,16 +13,21 @@ import io.restassured.specification.RequestSpecification;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.stream.IntStream;
+import static io.restassured.RestAssured.get;
 
 public class TestRest {
 
     private RequestSpecification httpRequest;
     private User user;
     private RestConfig config;
-
+    private List<User> users;
+    private static final Logger LOGGER = Logger.getLogger(TestRest.class.getName());
 
 
 //    @Given("Config URL: '(.*)'")
@@ -47,9 +54,11 @@ public class TestRest {
     }
 
     // RAW TEST will be re-factored
-    @Given("Testing GET, url: '(.*)' parameters: '(.*)'")
-    public void testingGet(String url, String getParameters) {
+    @Given("Testing create users parameters: (.*)")
+    public void testingGet(String getParameters) {
 
+        ObjectMapper objectMapper = new ObjectMapper();
+        List<User> users = new ArrayList<>();
      //   RestAssured.baseURI = url;
 //        config.configRestApiEndpoint(getParameters,"json","GET");
 
@@ -57,22 +66,35 @@ public class TestRest {
        // Response response = httpRequest.accept(ContentType.JSON).request(Method.GET, getParameters);
 
       //  httpRequest = config.configRestApiEndpoint(url,"json","GET");
-        Response response = httpRequest.request(getParameters);
+     //   Response response = httpRequest.request(getParameters);
         // Save the response(JSON) in a string
-        String responseBody = response.getBody().asString();
-        // Create a JSON object from the response
+
+
+        String responseBody = get(getParameters).then().extract().response().getBody().asString();
         JSONObject jsonObject = new JSONObject(responseBody);
-        // Create JSON Array from the response
         JSONArray jsonArray = jsonObject.getJSONArray("data");
+        //Use object mapper
+        try {
+            users = objectMapper.readValue(jsonArray.toString(), new TypeReference<List<User>>(){});
+        } catch (IOException e) {
+            LOGGER.warning("Cannot parse User entity from response");
+            LOGGER.log(Level.SEVERE,e.toString(), e);
+        }
+
+        // Create a JSON object from the response
+
+        // Create JSON Array from the response
+
+
         // Create a User from the response
-        List<User> users = new ArrayList<>();
 
 
-        IntStream.range(0, jsonArray.toList().size())
-                .forEach(i -> users.add(new User(jsonArray.getJSONObject(i).getInt("id")
-                        ,jsonArray.getJSONObject(i).getString("first_name")
-                        ,jsonArray.getJSONObject(i).getString("last_name")
-                        ,jsonArray.getJSONObject(i).getString("avatar"))));
+
+//        IntStream.range(0, jsonArray.toList().size())
+//                .forEach(i -> users.add(new User(jsonArray.getJSONObject(i).getInt("id")
+//                        ,jsonArray.getJSONObject(i).getString("first_name")
+//                        ,jsonArray.getJSONObject(i).getString("last_name")
+//                        ,jsonArray.getJSONObject(i).getString("avatar"))));
         System.out.println(users);
     }
 
