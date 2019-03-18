@@ -1,5 +1,19 @@
 Feature: API Test Automation
 
+
+  @API
+    Scenario: Test API POST functions
+    Given Config URL: 'https://reqres.in'
+    When Create a user with name: John job: Boss using request: '/api/users'
+    Then Validate created user with name: John and job: Boss
+    When Register user with email: testForLife@gangsta.com password: itsASecretToEveryone using request: '/api/register'
+    Then Validate registered user
+    When Unsuccessfully register user with email: notgood@stuff.com using request: '/api/register'
+    Then Validate unsuccessful user registration
+    When Login with email: test@gmail.com password: password using request '/api/login'
+    Then Check that login was successful
+    Then Check that login was unsuccessful with email: bademail@gmail.com using request: '/api/login'
+
   @API
   Scenario Outline: Test API GET calls
     Given Config URL: 'https://reqres.in'
