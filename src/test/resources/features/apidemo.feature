@@ -1,19 +1,5 @@
 Feature: API Test Automation
 
-
-  @API
-    Scenario: Test API POST functions
-    Given Config URL: 'https://reqres.in'
-    When Create a user with name: John job: Boss using request: '/api/users'
-    Then Validate created user with name: John and job: Boss
-    When Register user with email: testForLife@gangsta.com password: itsASecretToEveryone using request: '/api/register'
-    Then Validate registered user
-    When Unsuccessfully register user with email: notgood@stuff.com using request: '/api/register'
-    Then Validate unsuccessful user registration
-    When Login with email: test@gmail.com password: password using request '/api/login'
-    Then Check that login was successful
-    Then Check that login was unsuccessful with email: bademail@gmail.com using request: '/api/login'
-
   @API
   Scenario Outline: Test API GET calls
     Given Config URL: 'https://reqres.in'
@@ -35,6 +21,26 @@ Feature: API Test Automation
       | 5      | fuchsia rose |
       | 6      | true red     |
 
+  @API
+  Scenario: Test API POST functions
+    Given Config URL: 'https://reqres.in'
+    When Create a user with name: John job: Boss using request: '/api/users'
+    Then Validate created user with name: John and job: Boss
+    When Register user with email: testForLife@gangsta.com password: itsASecretToEveryone using request: '/api/register'
+    Then Validate registered user
+    When Unsuccessfully register user with email: notgood@stuff.com using request: '/api/register'
+    Then Validate unsuccessful user registration
+    When Login with email: test@gmail.com password: password using request '/api/login'
+    Then Check that login was successful
+    Then Check that login was unsuccessful with email: bademail@gmail.com using request: '/api/login'
+
+  @API
+  Scenario: Test API UPDATE/DELETE functions
+    Given Config URL: 'https://reqres.in'
+    When Create a user with name: Bob job: Gardener using request: '/api/users'
+    Then Update existing user using request: '/api/users/'
+    And Delete user using request: '/api/users/'
+    Then Verify that user is deleted using request: '/api/user/'
 
   @API
   Scenario Outline: Create user entity's and verify it

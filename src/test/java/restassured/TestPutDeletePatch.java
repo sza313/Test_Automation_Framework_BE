@@ -1,6 +1,8 @@
 package restassured;
 
+import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
+import cucumber.api.java.en.Then;
 import io.restassured.http.ContentType;
 
 import java.util.HashMap;
@@ -22,7 +24,7 @@ public class TestPutDeletePatch {
      * Test delete user
      * @param request The API endpoint
      */
-    @Given("Delete user using request: '(.*)'")
+    @And("Delete user using request: '(.*)'")
     public void deleteUser(String request) {
         given().when().delete(request + TestPost.getUserId())
                 .then().statusCode(204);
@@ -32,7 +34,7 @@ public class TestPutDeletePatch {
      * Verify that user is deleted
      * @param request The API endpoint
      */
-    @Given("Verify that user is deleted using request: '(.*)'")
+    @Then("Verify that user is deleted using request: '(.*)'")
     public void verifyDelete(String request) {
        when().get(request + TestPost.getUserId()).then().statusCode(404);
     }
@@ -41,7 +43,7 @@ public class TestPutDeletePatch {
      * Update existing user
      * @param request The API endpoint
      */
-    @Given("Update existing user using request: '(.*)'")
+    @Then("Update existing user using request: '(.*)'")
     public void updateUser(String request) {
         Map<String, String> existingUser = new HashMap<>();
         existingUser.put("name", TestPost.getName());
