@@ -38,7 +38,7 @@ public class TestPost {
      * @param job     Test data job of the user
      * @param request The API endpoint
      */
-    @When("Create a user with name: (.*) job: (.*) using request: '(.*)'")
+    @When("Create a user with name: '(.*)' job: '(.*)' using request: '(.*)'")
     public void createUser(String name, String job, String request) {
         Map<String, String> newUser = new HashMap<>();
         newUser.put("name", name);
@@ -58,7 +58,7 @@ public class TestPost {
      * @param name Test data user name
      * @param job  Test data user job
      */
-    @Then("Validate created user with name: (.*) and job: (.*)")
+    @Then("Validate created user with name: '(.*)' and job: '(.*)'")
     public void validateCreatedUser(String name, String job) {
         this.createUser.then().statusCode(201).body("name", equalTo(name)).body("job", equalTo(job));
     }

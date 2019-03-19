@@ -39,9 +39,9 @@ public class TestGet {
      * Test a single user response
      * @param request The API endpoint
      */
-    @When("Get a single user with request: '(.*)'")
-    public void testSingleUserByName(String request) {
-        this.singleUserResponse = get(request).then().extract().response();
+    @When("Get a single user with request: '(.*)' and user ID: '(.*)'")
+    public void testSingleUserByName(String request, String userId) {
+        this.singleUserResponse = get(request + userId).then().extract().response();
     }
 
     /**
@@ -49,7 +49,7 @@ public class TestGet {
      * @param firstName Test data first name
      * @param lastName Test data last name
      */
-    @Then("Verify a single user by first name: (.*) and last name: (.*)")
+    @Then("Verify a single user by first name: '(.*)' and last name: '(.*)'")
     public void verifySingleUserByName(String firstName, String lastName) {
         singleUserResponse.then().statusCode(200).assertThat().body("data.first_name", equalTo(firstName))
                 .and().body("data.last_name", equalTo(lastName));
@@ -84,11 +84,11 @@ public class TestGet {
 
     /**
      * Check if the collection contains the user ID's
-     * @param userId Test data user ID
+     * @param userName Test data user ID
      */
-    @Then("The collection contain the user ID: '(.*)'")
-    public void checkUserId(String userId) {
-        this.userCollectionResponse.then().statusCode(200).body("data.id", hasItems(Integer.parseInt(userId)));
+    @Then("The collection contain the user name: '(.*)'")
+    public void checkUserId(String userName) {
+        this.userCollectionResponse.then().statusCode(200).body("data.first_name", hasItems(userName));
     }
 
     /**
