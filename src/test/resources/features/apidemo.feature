@@ -18,7 +18,7 @@ Feature: API Test Automation
     Examples:
       | userName | resourceName | userID | firstName | lastName |
       | George   | cerulean     | 7      | Michael   | Lawson   |
-      | Janet    | fuchsia rose | 8      | Lindsay   | Ferguson |
+      | Janet    | fuchsia rose | 8      | Lindsay   | Fergusson |
       | Emma     | true red     | 9      | Tobias    | Funke    |
 
   @API
