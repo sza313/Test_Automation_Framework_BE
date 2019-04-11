@@ -11,7 +11,7 @@ public class TestRunnerParallel {
                 "-p", "json:target/test_result/test-report.json",
                 "-p", "html:target/test_result/html-result",
                 "-t","@API",
-                "-g", "restassured",
+                "-g", "restassured/stepdefs",
                 "src/test/resources/features/"});
     }
 }

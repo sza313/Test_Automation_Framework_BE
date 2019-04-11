@@ -30,7 +30,7 @@ public class TestUserEntity {
             this.userListResponse = objectMapper.readValue(responseBody, UserListResponse.class);
         } catch (IOException e) {
             LOGGER.warning("Cannot parse User entity from response");
-            LOGGER.log(Level.SEVERE,e.toString(), e);
+            LOGGER.log(Level.SEVERE, e.toString(), e);
         }
         this.users = userListResponse.getData();
     }
