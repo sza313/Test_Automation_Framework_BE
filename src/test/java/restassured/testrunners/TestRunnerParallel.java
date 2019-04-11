@@ -7,11 +7,13 @@ public class TestRunnerParallel {
 
     @Test
     public void testRest() {
-        Main.main(new String[]{"--threads", "4",
+        Main.run(new String[]{"--threads", "4",
                 "-p", "json:target/test_result/test-report.json",
                 "-p", "html:target/test_result/html-result",
                 "-t","@API",
                 "-g", "restassured/stepdefs",
-                "src/test/resources/features/"});
+                "src/test/resources/features/"},
+                Thread.currentThread().getContextClassLoader());
     }
+
 }
