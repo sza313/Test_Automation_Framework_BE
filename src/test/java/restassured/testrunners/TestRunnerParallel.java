@@ -7,7 +7,7 @@ public class TestRunnerParallel {
 
     @Test
     public void testRest() {
-        Main.run(new String[]{"--threads", "4",
+        Main.run(new String[]{"--threads", "1",
                 "-p", "json:target/test_result/test-report.json",
                 "-p", "html:target/test_result/html-result",
                 "-t","@API",

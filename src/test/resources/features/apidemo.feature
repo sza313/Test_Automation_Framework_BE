@@ -2,7 +2,7 @@ Feature: API Test Automation
 
   @API
   Scenario Outline: Test API GET calls
-    Given Config URL: 'https://reqres.in'
+    Given Config URL: 'http://localhost:4040'
     When Get a single user with request: '/api/users/2'
     Then Verify a single user by first name: Janet and last name: Weaver
     When Get a single resource with request: '/api/unknown/2'
@@ -23,7 +23,7 @@ Feature: API Test Automation
 
   @API
   Scenario: Test API POST functions
-    Given Config URL: 'https://reqres.in'
+    Given Config URL: 'http://localhost:4040'
     When Create a user with name: John job: Boss using request: '/api/users'
     Then Validate created user with name: John and job: Boss
     When Register user with email: testForLife@gangsta.com password: itsASecretToEveryone using request: '/api/register'
@@ -36,7 +36,7 @@ Feature: API Test Automation
 
   @API
   Scenario: Test API UPDATE/DELETE functions
-    Given Config URL: 'https://reqres.in'
+    Given Config URL: 'http://localhost:4040'
     When Create a user with name: Bob job: Gardener using request: '/api/users'
     Then Update existing user using request: '/api/users/'
     And Delete user using request: '/api/users/'
@@ -44,7 +44,7 @@ Feature: API Test Automation
 
   @API
   Scenario Outline: Create user entity's and verify it
-    Given Config URL: 'https://reqres.in'
+    Given Config URL: 'http://localhost:4040'
     When Create user entity's using request '/api/users?page=2'
     Then User is present by first name: '<firstName>'
 

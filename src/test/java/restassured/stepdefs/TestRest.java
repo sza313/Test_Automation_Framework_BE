@@ -1,4 +1,4 @@
-package restassured;
+package restassured.stepdefs;
 
 import cucumber.api.java.en.Given;
 import io.restassured.RestAssured;
@@ -9,7 +9,7 @@ import io.restassured.specification.RequestSpecification;
 
 public class TestRest {
 
-    @Given("Config URL: '(.*)'")
+    @Given("Set up URL: '(.*)'")
     public void setupUrl(String url) {
         // Specify the base URL to base RESTful service
         RestAssured.baseURI = url;

@@ -9,7 +9,7 @@ import org.junit.runner.RunWith;
         features = "src/test/resources/features",
         glue = "restassured/stepdefs",
         plugin = { "pretty", "html:target/test_result/html-result","json:target/test_result/test-report.json","junit:target/test_result/result.xml" },
-        tags = {"@API"},
+        tags = {"@Sample"},
         monochrome = true)
 public class TestRunnerSample {
 }
