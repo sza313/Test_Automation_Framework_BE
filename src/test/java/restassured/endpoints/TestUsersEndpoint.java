@@ -24,6 +24,8 @@ import static org.hamcrest.core.IsEqual.equalTo;
 
 public class TestUsersEndpoint {
 
+    private UserListResponse userListResponse;
+
     @BeforeClass
     public void setUp() {
         RestAssured.baseURI = "http://localhost:4040";
@@ -63,8 +65,8 @@ public class TestUsersEndpoint {
         existingUser.put("job", "Gardener");
 
         given().accept(ContentType.JSON).contentType(ContentType.JSON).body(existingUser)
-                .when().put("/api/users"+"/123")
-                .then().statusCode(200).assertThat().body("$",hasKey("updatedAt"));
+                .when().put("/api/users" + "/123")
+                .then().statusCode(200).assertThat().body("$", hasKey("updatedAt"));
     }
 
     @Test
@@ -89,7 +91,6 @@ public class TestUsersEndpoint {
                 .toArray(Object[][]::new);
     }
 
-    private UserListResponse userListResponse;
 
     @Test
     public void testGetUserCollection() {
