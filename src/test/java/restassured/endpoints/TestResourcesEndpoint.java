@@ -1,4 +1,4 @@
-package restassured.get;
+package restassured.endpoints;
 
 import entity.Resource;
 import entity.ResourceListResponse;
@@ -21,7 +21,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.IsEqual.equalTo;
 
 
-public class TestGetResources {
+public class TestResourcesEndpoint {
 
     private ResourceListResponse resourceListResponse;
 

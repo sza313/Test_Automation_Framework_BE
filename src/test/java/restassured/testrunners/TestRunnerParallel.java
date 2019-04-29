@@ -3,6 +3,7 @@ package restassured.testrunners;
 import cucumber.api.cli.Main;
 import org.junit.Test;
 
+@Deprecated
 public class TestRunnerParallel {
 
     @Test

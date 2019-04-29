@@ -19,6 +19,7 @@ import static org.hamcrest.number.OrderingComparison.greaterThanOrEqualTo;
  * API endpoint information: https://reqres.in/
  * @author tamas.a.kiss
  */
+@Deprecated
 public class TestGet {
 
     private Response singleUserResponse;

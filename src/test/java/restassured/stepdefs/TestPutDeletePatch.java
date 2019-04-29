@@ -17,6 +17,7 @@ import static org.hamcrest.Matchers.hasKey;
  * API endpoint information: https://reqres.in/
  * @author tamas.a.kiss
  */
+@Deprecated
 public class TestPutDeletePatch {
 
     /**

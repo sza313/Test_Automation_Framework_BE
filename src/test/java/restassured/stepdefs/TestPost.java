@@ -20,6 +20,7 @@ import static org.hamcrest.Matchers.notNullValue;
  *
  * @author tamas.a.kiss
  */
+@Deprecated
 public class TestPost {
 
     private static int userId;

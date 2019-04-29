@@ -15,6 +15,7 @@ import java.util.logging.Logger;
 
 import static io.restassured.RestAssured.get;
 
+@Deprecated
 public class TestUserEntity {
 
     private static final Logger LOGGER = Logger.getLogger(TestUserEntity.class.getName());
